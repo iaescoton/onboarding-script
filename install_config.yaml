@@ -1,0 +1,158 @@
+installation:
+  tree:
+    windows:
+      system:
+        package_manager:
+          name: chocolatey
+          commands:
+            install: |
+              powershell -NoProfile -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+            verify: choco --version
+      tools:
+        languages:
+          - name: python
+            check: where python
+            command: sh -c "choco install -y python"
+          - name: node
+            check: where node
+            command: sh -c "choco install -y node"
+          - name: nvm
+            check: where nvm
+            command: sh -c "choco install -y nvm"
+          - name: npm
+            check: where npm
+            command: sh -c "choco install -y npm"
+        containers:
+          - name: docker-desktop
+            check: where docker
+            command: sh -c "choco install -y docker-desktop"
+          - name: rancher
+            check: where rancher
+            command: sh -c "choco install -y rancher"
+        version_control:
+          - name: git
+            check: where git
+            command: sh -c "choco install -y git"
+        cloud_tools:
+          - name: gcloud
+            check: where gcloud
+            command: sh -c "choco install -y google-cloud-sdk"
+        security_tools:
+          - name: 1password
+            check: where 1password
+            command: sh -c "choco install -y 1password"
+      development:
+        editors:
+          vscode:
+            package: vscode
+            commands:
+              check: where code
+              install: choco install -y vscode
+              extensions:
+                command: sh -c "code --install-extension"
+                items:
+                  - ms-python.python
+                  - dbaeumer.vscode-eslint
+                  - esbenp.prettier-vscode
+                  - github.copilot
+                  - ms-vscode.vscode-typescript-next
+                  - msjsdiag.debugger-for-chrome
+                  - ms-vscode.react-native
+          intellij:
+            package: intellij-idea-ultimate
+            commands:
+              check: where idea64.exe
+              install: choco install -y intellijidea-ultimate
+              plugins:
+                command: sh -c "idea64.exe installPlugins"
+                items:
+                  - com.intellij.java
+                  - org.jetbrains.kotlin
+                  - com.intellij.database
+                  - Pythonid
+                  - JavaScriptLanguage
+                  - NodeJS
+                  - ReactNative
+          datagrip:
+            package: datagrip
+            commands:
+              check: where datagrip64.exe
+              install: choco install -y datagrip
+    macos:
+      system:
+        package_manager:
+          name: homebrew
+          commands:
+            install: |
+              /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            verify: brew --version
+      tools:
+        languages:
+          - name: python
+            check: which python
+            command: sh -c "brew install python"
+          - name: node
+            check: which node
+            command: sh -c "brew install node"
+          - name: nvm
+            check: which nvm
+            command: sh -c "brew install nvm"
+          - name: npm
+            check: which npm
+            command: sh -c "brew install npm"
+        containers:
+          - name: docker
+            check: which docker
+            command: sh -c "brew install --cask docker"
+          - name: rancher
+            check: which rancher
+            command: sh -c "brew install rancher"
+        version_control:
+          - name: git
+            check: which git
+            command: sh -c "brew install git"
+        cloud_tools:
+          - name: gcloud
+            check: which gcloud
+            command: sh -c "brew install --cask google-cloud-sdk"
+        security_tools:
+          - name: 1password
+            check: which 1password
+            command: sh -c "brew install --cask 1password"
+      development:
+        editors:
+          vscode:
+            package: visual-studio-code
+            commands:
+              check: which code
+              install: brew install --cask visual-studio-code
+              extensions:
+                command: sh -c "code --install-extension"
+                items:
+                  - ms-python.python
+                  - dbaeumer.vscode-eslint
+                  - esbenp.prettier-vscode
+                  - github.copilot
+                  - ms-vscode.vscode-typescript-next
+                  - msjsdiag.debugger-for-chrome
+                  - ms-vscode.react-native
+          intellij:
+            package: intellij-idea-ultimate
+            commands:
+              check: which idea
+              install: brew install --cask intellij-idea-ultimate
+              plugins:
+                command: sh -c "idea installPlugins"
+                items:
+                  - com.intellij.java
+                  - org.jetbrains.kotlin
+                  - com.intellij.database
+                  - Pythonid
+                  - JavaScriptLanguage
+                  - NodeJS
+                  - ReactNative
+          datagrip:
+            package: datagrip
+            commands:
+              check: which datagrip
+              install: brew install --cask datagrip
