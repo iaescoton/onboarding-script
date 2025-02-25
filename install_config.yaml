@@ -12,7 +12,7 @@ installation:
         languages:
           - name: python
             check: where python
-            command: sh -c "choco install -y python"
+            command: sh -c "choco install -y python313"
           - name: node
             check: where node
             command: sh -c "choco install -y node"
@@ -90,7 +90,7 @@ installation:
         languages:
           - name: python
             check: which python
-            command: sh -c "brew install python"
+            command: sh -c "brew install python@3.13"
           - name: node
             check: which node
             command: sh -c "brew install node"
