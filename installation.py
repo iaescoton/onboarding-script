@@ -56,16 +56,16 @@ def traverse_and_execute(node, path=None):
     if isinstance(node, dict):
         for key, value in node.items():
             new_path = path + [key]
-            if 'check' in value and 'install' in value:
+            if 'check' in value and 'command' in value:
                 check_cmd = value['check']
-                install_cmd = value['install']
+                install_cmd = value['command']
                 if is_installed(check_cmd):
                     print(f"\033[93m⏩ Skipping {' > '.join(new_path)} (Already Installed)\033[0m")
                 else:
                     execute_command(install_cmd, f"Installing {' > '.join(new_path)}")
-            elif 'commands' in value:
-                for cmd_name, cmd in value['commands'].items():
-                    execute_command(cmd, f"Executing {' > '.join(new_path)} > {cmd_name}")
+            # elif 'command' in value:
+            #     for cmd_name, cmd in value['command'].items():
+            #         execute_command(cmd, f"Executing {' > '.join(new_path)} > {cmd_name}")
             elif isinstance(value, dict) and 'command' in value and 'items' in value:
                 for item in value['items']:
                     execute_command(f"{value['command']} {item}", f"Executing {' > '.join(new_path)} for {item}")
@@ -74,7 +74,6 @@ def traverse_and_execute(node, path=None):
     elif isinstance(node, list):
         for item in node:
             traverse_and_execute(item, path)
-
 
 def main():
     if len(sys.argv) < 2:
