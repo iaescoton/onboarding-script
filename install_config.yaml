@@ -62,78 +62,68 @@ installation:
       datagrip:
         check: where datagrip64.exe
         command: choco install -y datagrip
-    macos:
-      package_manager:
-        - name: homebrew
-          command: |
-              /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          check: brew --version
-      languages:
-        - name: python
-          check: which python
-          command: sh -c "brew install python@3.13"
-        - name: node
-          check: which node
-          command: sh -c "brew install node"
-        - name: nvm
-          check: which nvm
-          command: sh -c "brew install nvm"
-        - name: npm
-          check: which npm
-          command: sh -c "brew install npm"
-      api_testing:
-        - name: postman
-          check: which postman
-          command: sh -c "brew install --cask postman"
-      containers:
-        - name: docker
-          check: which docker
-          command: sh -c "brew install --cask docker"
-        - name: rancher
-          check: which rancher
-          command: sh -c "brew install rancher"
-      version_control:
-        - name: git
-          check: which git
-          command: sh -c "brew install git"
-      cloud_tools:
-        - name: gcloud
-          check: which gcloud
-          command: sh -c "brew install --cask google-cloud-sdk"
-      security_tools:
-        - name: 1password
-          check: which 1password
-          command: sh -c "brew install --cask 1password"
-      editors:
-        vscode:
-          package: visual-studio-code
-          check: which code
-          command: brew install --cask visual-studio-code
-          extensions:
-            command: sh -c "code --install-extension"
-            items:
-              - ms-python.python
-              - dbaeumer.vscode-eslint
-              - esbenp.prettier-vscode
-              - github.copilot
-              - ms-vscode.vscode-typescript-next
-              - msjsdiag.debugger-for-chrome
-              - ms-vscode.react-native
-        intellij:
-          package: intellij-idea-ultimate
-          check: which idea
-          command: brew install --cask intellij-idea-ultimate
-          plugins:
-            command: sh -c "idea installPlugins"
-            items:
-              - com.intellij.java
-              - org.jetbrains.kotlin
-              - com.intellij.database
-              - Pythonid
-              - JavaScriptLanguage
-              - NodeJS
-              - ReactNative
-        datagrip:
-          package: datagrip
-          check: which datagrip
-          command: brew install --cask datagrip
+  macos:
+    package_manager:
+      name: homebrew
+      command: |
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      check: brew --version
+    python:
+      check: which python
+      command: "brew install python@3.13"
+    node:
+      check: which node
+      command: "brew install node"
+    nvm:
+      check: which nvm
+      command: "brew install nvm"
+    npm:
+      check: which npm
+      command: "brew install npm"
+    postman:
+      check: which postman
+      command: "brew install --cask postman"
+    docker-desktop:
+      check: which docker
+      command: "brew install --cask docker"
+    rancher:
+      check: which rancher
+      command: "brew install rancher"
+    git:
+      check: which git
+      command: "brew install git"
+    gcloud:
+      check: which gcloud
+      command: "brew install --cask google-cloud-sdk"
+    onepassword:
+      check: which 1password
+      command: "brew install --cask 1password"
+    vscode:
+      check: which code
+      command: "brew install --cask visual-studio-code"
+      extensions:
+        command: "code --install-extension"
+        items:
+          - ms-python.python
+          - dbaeumer.vscode-eslint
+          - esbenp.prettier-vscode
+          - github.copilot
+          - ms-vscode.vscode-typescript-next
+          - msjsdiag.debugger-for-chrome
+          - ms-vscode.react-native
+    intellij:
+      check: which idea
+      command: "brew install --cask intellij-idea-ultimate"
+      plugins:
+        command: "idea installPlugins"
+        items:
+          - com.intellij.java
+          - org.jetbrains.kotlin
+          - com.intellij.database
+          - Pythonid
+          - JavaScriptLanguage
+          - NodeJS
+          - ReactNative
+    datagrip:
+      check: which datagrip
+      command: "brew install --cask datagrip"
