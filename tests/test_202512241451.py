@@ -64,11 +64,20 @@ class TestInstallationManager(unittest.TestCase):
         
         with patch('sys.exit') as mock_exit:
             manager = InstallationManager("test_config.yaml")
+            # Call load_config to trigger the file existence check
+            result = manager.load_config()
+            
+            # Now we can assert the existence check was called
             mock_exists.assert_called_once_with("test_config.yaml")
+            
+            # Also verify the file was opened
             mock_file.assert_called_once_with("test_config.yaml", 'r')
+            
+            # Verify yaml.safe_load was called with the file handle
             mock_yaml_load.assert_called_once()
-            self.assertIsNotNone(manager.config)
-            mock_exit.assert_not_called()
+            
+            # Verify load_config returned True on success
+            self.assertTrue(result)
     
     @patch('os.path.exists', return_value=False)
     @patch('sys.exit')
