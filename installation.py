@@ -138,7 +138,7 @@ class InstallationManager:
 def main():
     """Main function to run the installation script."""
     if len(sys.argv) < 2:
-        print("Usage: python installation.py <install_config.yml>")
+        print("Usage: python installation.py <install_config.yaml>")
         sys.exit(1)
     
     config_file = sys.argv[1]

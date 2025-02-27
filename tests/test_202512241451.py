@@ -63,9 +63,9 @@ class TestInstallationManager(unittest.TestCase):
         mock_yaml_load.return_value = {'installation': {'tree': {'windows': {}, 'macos': {}}}}
         
         with patch('sys.exit') as mock_exit:
-            manager = InstallationManager("test_config.yml")
-            mock_exists.assert_called_once_with("test_config.yml")
-            mock_file.assert_called_once_with("test_config.yml", 'r')
+            manager = InstallationManager("test_config.yaml")
+            mock_exists.assert_called_once_with("test_config.yaml")
+            mock_file.assert_called_once_with("test_config.yaml", 'r')
             mock_yaml_load.assert_called_once()
             self.assertIsNotNone(manager.config)
             mock_exit.assert_not_called()
@@ -74,8 +74,8 @@ class TestInstallationManager(unittest.TestCase):
     @patch('sys.exit')
     def test_file_not_found_terminates(self, mock_exit, mock_exists):
         """Test that the script terminates immediately if the config file is not found."""
-        InstallationManager("non_existent.yml")
-        mock_exists.assert_called_once_with("non_existent.yml")
+        InstallationManager("non_existent.yaml")
+        mock_exists.assert_called_once_with("non_existent.yaml")
         mock_exit.assert_called_once_with(1)
     
     @patch('yaml.safe_load')
@@ -86,9 +86,9 @@ class TestInstallationManager(unittest.TestCase):
         """Test that the script terminates if there's an error parsing the YAML."""
         mock_yaml_load.side_effect = yaml.YAMLError("Test YAML error")
         
-        InstallationManager("invalid.yml")
-        mock_exists.assert_called_once_with("invalid.yml")
-        mock_file.assert_called_once_with("invalid.yml", 'r')
+        InstallationManager("invalid.yaml")
+        mock_exists.assert_called_once_with("invalid.yaml")
+        mock_file.assert_called_once_with("invalid.yaml", 'r')
         mock_yaml_load.assert_called_once()
         mock_exit.assert_called_once_with(1)
     
@@ -103,7 +103,7 @@ class TestInstallationManager(unittest.TestCase):
         mock_process.returncode = 0
         mock_run.return_value = mock_process
         
-        manager = InstallationManager("test_config.yml")
+        manager = InstallationManager("test_config.yaml")
         result = manager.is_installed("test_command")
         self.assertTrue(result)
         mock_run.assert_called_once()
@@ -119,7 +119,7 @@ class TestInstallationManager(unittest.TestCase):
         mock_process.returncode = 1
         mock_run.return_value = mock_process
         
-        manager = InstallationManager("test_config.yml")
+        manager = InstallationManager("test_config.yaml")
         result = manager.is_installed("test_command")
         self.assertFalse(result)
         mock_run.assert_called_once()
@@ -133,7 +133,7 @@ class TestInstallationManager(unittest.TestCase):
         mock_yaml_load.return_value = {'installation': {'tree': {'windows': {}, 'macos': {}}}}
         mock_run.side_effect = Exception("Test exception")
         
-        manager = InstallationManager("test_config.yml")
+        manager = InstallationManager("test_config.yaml")
         result = manager.is_installed("test_command")
         self.assertFalse(result)
         mock_run.assert_called_once()
@@ -164,7 +164,7 @@ class TestInstallationManager(unittest.TestCase):
             }
         }
         
-        manager = InstallationManager("test_config.yml")
+        manager = InstallationManager("test_config.yaml")
         manager.traverse_and_execute(config)
         
         # Check if is_installed was called for both tools
@@ -193,7 +193,7 @@ class TestInstallationManager(unittest.TestCase):
         }
         mock_yaml_load.return_value = yaml_data
         
-        manager = InstallationManager("test_config.yml")
+        manager = InstallationManager("test_config.yaml")
         result = manager.run_installation()
         
         self.assertTrue(result)
@@ -217,7 +217,7 @@ class TestInstallationManager(unittest.TestCase):
         }
         mock_yaml_load.return_value = yaml_data
         
-        manager = InstallationManager("test_config.yml")
+        manager = InstallationManager("test_config.yaml")
         result = manager.run_installation()
         
         self.assertFalse(result)
