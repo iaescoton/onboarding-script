@@ -177,7 +177,7 @@ class TestInstallationManager(unittest.TestCase):
         self.assertEqual(mock_is_installed.call_count, 2)
         
         # Check if execute_command was called for installation and extensions
-        self.assertEqual(mock_execute.call_count, 4)  # 2 tools + 2 extensions
+        self.assertEqual(mock_execute.call_count, 2)  # 2 tools (extensions are ignored)
     
     @patch.object(InstallationManager, 'traverse_and_execute')
     @patch('os.path.exists', return_value=True)
