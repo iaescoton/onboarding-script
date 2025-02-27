@@ -50,6 +50,9 @@ class InstallationManager:
             bool: True if successful, False otherwise
         """
         #print(f"---load_config--- \nself.config_file: {str(self.config_file)}")
+        if not os.path.exists(self.config_file):
+            raise FileNotFoundError(f"Config file '{self.config_file}' not found") 
+
         try:
             with open(self.config_file, 'r') as file:
                 self.config = yaml.safe_load(file)                
@@ -124,8 +127,8 @@ class InstallationManager:
             bool: True if all installations succeeded, False otherwise
         """
         #print("---run_installation---")
-        if not self.load_config():
-            return False
+        # if not self.load_config():
+        #     return False
             
         if self.config:
             # print(f"*** calling self.traverse_and_execute() | with parameter self.config: {str(self.config)}")
@@ -146,6 +149,7 @@ def main():
     try:
 
         installer = InstallationManager(config_file)
+        installer.load_config()
         success = installer.run_installation()
         
         if success:
@@ -155,7 +159,11 @@ def main():
             
         input("\nPress any key to exit...")
         return 0 if success else 1
-    
+
+    except FileNotFoundError as e:
+        print(f"File not found Error: {str(e)}")
+        return 1
+
     except Exception as e:
         print(f"An unexpected error occurred: {str(e)}")
         return 1

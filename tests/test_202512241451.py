@@ -74,9 +74,15 @@ class TestInstallationManager(unittest.TestCase):
     @patch('sys.exit')
     def test_file_not_found_terminates(self, mock_exit, mock_exists):
         """Test that the script terminates immediately if the config file is not found."""
-        InstallationManager("non_existent.yaml")
-        mock_exists.assert_called_once_with("non_existent.yaml")
-        mock_exit.assert_called_once_with(1)
+        # Create an instance of the installer
+        installer = InstallationManager("non_existent.yaml")
+        
+        # This is assuming you have a method like this in your main module        
+        # Use assertRaises context manager to verify the exception
+        with self.assertRaises(FileNotFoundError) as context:
+            installer.load_config()
+        
+        self.assertIn("non_existent.yaml", str(context.exception))
     
     @patch('yaml.safe_load')
     @patch('builtins.open', new_callable=mock_open)
