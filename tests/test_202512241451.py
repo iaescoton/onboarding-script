@@ -209,8 +209,14 @@ class TestInstallationManager(unittest.TestCase):
         mock_yaml_load.return_value = yaml_data
         
         manager = InstallationManager("test_config.yaml")
+        # Explicitly load the config to set manager.config properly
+        load_result = manager.load_config()
+        self.assertTrue(load_result, "Config should load successfully")
+
+        # Now run the installation
         result = manager.run_installation()
-        
+        self.assertTrue(result)
+            
         self.assertTrue(result)
         mock_traverse.assert_called_once_with({'test': 'data'})
     
