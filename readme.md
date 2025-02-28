@@ -79,23 +79,26 @@ installation:
         name: chocolatey
         commands:
           install: <installation command>
-          verify: <verification command>
-      tools:
-        languages:
-            name: python
-            check: where python
-            command: choco install -y python
+          verify: <verification command>      
+      python:
+        check: where python
+        command: choco install -y python
     macos:    # macOS-specific configuration
       package_manager:
         name: homebrew
         commands:
           install: <installation command>
           verify: <verification command>
-      tools:
-        languages:
-            name: python
-            check: which python
-            command: brew install python
+      name: python
+        check: which python
+        command: brew install python
+```
+
+## Running tests
+
+To execute tests using `pytest`, use the following:
+```
+pytest -v tests/
 ```
 
 
@@ -103,9 +106,11 @@ installation:
 
 The installer creates detailed logs in `installation.log`. Log levels can be controlled using the `--debug` flag:
 
-- INFO: Default level, shows main installation steps
-- DEBUG: Detailed logging for troubleshooting
-- ERROR: Installation failures and errors
+- ~~INFO: Default level, shows main installation steps~~
+- ~~DEBUG: Detailed logging for troubleshooting~~
+- ~~ERROR: Installation failures and errors~~
+
+\* currently not yet implemented
 
 ## Error Handling
 
@@ -120,10 +125,10 @@ Failed installations are reported in the installation summary with detailed erro
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+1. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+1. Push to the branch (`git push origin feature/AmazingFeature`)
+1. Open a Pull Request
 
 ## License
 
@@ -137,11 +142,11 @@ This project is licensed under the MIT License - see the LICENSE file for detail
    - Windows: Run PowerShell as Administrator
    - macOS: Use sudo when necessary
 
-2. **Package Manager Installation Fails**
+1. **Package Manager Installation Fails**
    - Windows: Ensure PowerShell execution policy allows script execution
    - macOS: Install Command Line Tools first: `xcode-select --install`
 
-3. **Tool Installation Fails**
+1. **Tool Installation Fails**
    - Check internet connection
    - Verify package name in configuration
    - Check system requirements for specific tools
@@ -149,8 +154,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ### Getting Help
 
 1. Check the logs in `installation.log`
-2. Enable debug mode with `--debug` flag
-3. Open an issue on GitHub with:
+1. Enable debug mode with `--debug` flag
+1. Open an issue on GitHub with:
    - Log contents
    - System information
    - Configuration file
