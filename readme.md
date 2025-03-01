@@ -163,12 +163,16 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Roadmap
 
-- [ ] Parallel installation support
-- [ ] Custom installation sequences
-- [ ] Remote configuration support
-- [ ] Installation profiles
-- [ ] Update checking for installed tools
-- [ ] GUI interface
+- # v.0.1.0 Roadmap
+  - [ ] Logging
+  - [ ] **DEBUG** and **VERBOSE** modes
+  - [ ] yaml versioning
+  - [ ] switching to [Poetry](https://python-poetry.org/)
+  - [ ] specific version to install
+  - [ ] Custom installation sequences
+  - [ ] Installation profiles
+  - [ ] Update checking for installed tools
+  - [ ] ~~GUI interface~~ _(this will remain as a cli tool only)_
 
 ## Requirements
 
